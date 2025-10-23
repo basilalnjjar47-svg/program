@@ -64,6 +64,34 @@
             bottom: -100px;
             right: -100px;
         }
+        
+        /* -------------------------------------------------------------------------- */
+        /*                        نظام الإشعارات (Notification System)                        */
+        /* -------------------------------------------------------------------------- */
+        .notification {
+            position: fixed;
+            top: 90px; /* تحت شريط التنقل */
+            left: 50%;
+            transform: translate(-50%, -20px); /* يبدأ من الأعلى قليلاً */
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 700;
+            z-index: 2000; /* ليكون فوق كل شيء */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .notification.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%);
+        }
+
+        .notification.success { background-color: #22C55E; } /* أخضر للنجاح */
+        .notification.error { background-color: #EF4444; } /* أحمر للخطأ */
 
         /* -------------------------------------------------------------------------- */
         /*                             شريط التنقل (Navigation Bar)                             */
@@ -1001,6 +1029,9 @@
 </head>
 <body>
 
+    <!-- عنصر الإشعار (سيكون مخفياً بشكل افتراضي) -->
+    <div id="notification" class="notification"></div>
+
     <!-- ================================================== -->
     <!--                 شريط التنقل (Navbar)                 -->
     <!-- ================================================== -->
@@ -1287,13 +1318,13 @@
                     return response.json();
                 })
                 .then(newTestimonial => {
-                    alert('تم ارسال التعليق بنجاح. شكراً لك!');
+                    showNotification('تم إرسال رأيك بنجاح. شكراً لك!', 'success');
                     addTestimonialToDOM(newTestimonial, true); // إضافة التعليق الجديد في بداية القائمة
                     addForm.reset(); // إفراغ حقول النموذج
                 })
                 .catch(error => {
                     console.error('خطأ في إضافة الرأي:', error);
-                    alert('فشل إرسال الرأي. يرجى المحاولة مرة أخرى.');
+                    showNotification('فشل إرسال الرأي. يرجى المحاولة مرة أخرى.', 'error');
                 })
                 .finally(() => {
                     // إعادة تفعيل الزر
@@ -1343,6 +1374,20 @@
                 });
             });
 
+            // --- وظيفة إظهار الإشعارات ---
+            function showNotification(message, type = 'success') {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = 'notification'; // إعادة تعيين الكلاسات
+                notification.classList.add(type);
+                notification.classList.add('show');
+
+                // إخفاء الإشعار بعد 4 ثوانٍ
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 4000);
+            }
+
             // --- وظيفة لإضافة بطاقة رأي إلى الصفحة ---
             function addTestimonialToDOM(testimonial, prepend = false) {
                 const card = document.createElement('div');
@@ -1363,6 +1408,8 @@
                 } else {
                     testimonialsGrid.appendChild(card); // إضافة العنصر في النهاية
                 }
+                // يجب إعادة تفعيل أزرار الحذف بعد إضافة أي عنصر جديد
+                addDeleteFunctionality();
             }
             // --- وظيفة الحذف ---
             function addDeleteFunctionality() {
@@ -1394,7 +1441,7 @@
                                 })
                                 .catch(error => {
                                     console.error('خطأ في الحذف:', error);
-                                    alert(`فشل الحذف: ${error.message}`);
+                                    showNotification(`فشل الحذف: ${error.message}`, 'error');
                                 });
                             }
                         }
