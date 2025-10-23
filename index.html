@@ -1440,7 +1440,7 @@
                                 .then(response => {
                                     if (response.ok) {
                                         this.closest('.testimonial-card').remove();
-                                        alert('تم الحذف بنجاح!');
+                                        showNotification('تم الحذف بنجاح!', 'success');
                                     } else {
                                         return response.text().then(text => { throw new Error(text) });
                                     }
