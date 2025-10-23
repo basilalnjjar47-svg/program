@@ -5,6 +5,8 @@ const cors = require('cors');
 
 const app = express();
 // Render ستقوم بتعيين المنفذ تلقائياً، هذا السطر يضمن التوافق
+// Tell Express to trust the X-Forwarded-For header set by Render
+app.set('trust proxy', 1);
 const port = process.env.PORT || 3000;
 
 // هذا هو المسار الصحيح لملف البيانات
@@ -35,6 +37,7 @@ app.get('/api/testimonials', (req, res) => {
 // 2. نقطة النهاية (API) لإضافة رأي عميل جديد
 app.post('/api/testimonials', (req, res) => {
     const newTestimonial = {
+        id: Date.now(), // إضافة معرّف فريد لكل تعليق جديد
         name: req.body.name,
         message: req.body.message
     };
@@ -61,6 +64,42 @@ app.post('/api/testimonials', (req, res) => {
             // بعد الحفظ بنجاح، يتم توجيه المستخدم إلى الصفحة الرئيسية عند قسم الآراء
             // هذا هو التعديل الذي طلبته لإعادة التوجيه للصفحة الرئيسية
             res.redirect('/index.html#testimonials');
+        });
+    });
+});
+
+// 3. نقطة النهاية (API) لحذف رأي عميل (محمية بـ IP)
+app.delete('/api/testimonials/:id', (req, res) => {
+    // =================================================================
+    //      !!! مهم جداً: ضع عنوان الـ IP الخاص بك هنا !!!
+    //  يمكنك معرفة الـ IP الخاص بك بالبحث في جوجل عن "what is my IP"
+    // =================================================================
+    const allowedIp = '37.107.184.170'; // <--- تم وضع الـ IP الخاص بك هنا
+
+    const requestIp = req.ip;
+
+    console.log(`محاولة حذف من الـ IP: ${requestIp}`); // لغرض التجربة
+
+    if (requestIp !== allowedIp) {
+        console.log('رفض الطلب: الـ IP غير مسموح له بالحذف.');
+        return res.status(403).send('غير مصرح لك بالقيام بهذه العملية.');
+    }
+
+    const testimonialId = parseInt(req.params.id, 10);
+
+    fs.readFile(testimonialsFilePath, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).send('خطأ في قراءة البيانات.');
+        }
+        let testimonials = JSON.parse(data);
+        // فلترة الآراء وإزالة الرأي الذي يطابق الـ ID المطلوب
+        const updatedTestimonials = testimonials.filter(t => t.id !== testimonialId);
+
+        fs.writeFile(testimonialsFilePath, JSON.stringify(updatedTestimonials, null, 2), (err) => {
+            if (err) {
+                return res.status(500).send('خطأ في حفظ البيانات بعد الحذف.');
+            }
+            res.status(200).send({ message: 'تم حذف الرأي بنجاح.' });
         });
     });
 });

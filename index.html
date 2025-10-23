@@ -804,6 +804,14 @@
             margin-top: 0;
         }
 
+        .delete-btn {
+            background: none; border: none; color: #F87171; cursor: pointer; font-size: 0.9em;
+            position: absolute; top: 15px; left: 15px; opacity: 0.5; transition: opacity 0.3s;
+        }
+        .testimonial-card:hover .delete-btn {
+            opacity: 1;
+        }
+
         /* -------------------------------------------------------------------------- */
         /*                        قسم اتصل بنا (Contact Section)                        */
         /* -------------------------------------------------------------------------- */
@@ -1230,6 +1238,9 @@
                     testimonials.forEach(testimonial => {
                         const card = `
                             <div class="testimonial-card">
+                                <button class="delete-btn" data-id="${testimonial.id}" title="حذف الرأي">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                                 <p class="testimonial-quote">${testimonial.message}</p>
                                 <div class="testimonial-author">
                                     <div class="testimonial-author-info">
@@ -1240,6 +1251,9 @@
                         `;
                         testimonialsGrid.innerHTML += card;
                     });
+
+                    // بعد إضافة الأزرار، قم بتفعيلها
+                    addDeleteFunctionality();
                 })
                 .catch(error => console.error('خطأ في جلب آراء العملاء:', error));
 
@@ -1283,6 +1297,36 @@
                     hamburger.classList.remove('is-active');
                 });
             });
+
+            // --- وظيفة الحذف ---
+            function addDeleteFunctionality() {
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const testimonialId = this.getAttribute('data-id');
+                        
+                        if (confirm('هل أنت متأكد من أنك تريد حذف هذا الرأي؟')) {
+                            fetch(`https://program-f2dx.onrender.com/api/testimonials/${testimonialId}`, {
+                                method: 'DELETE',
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    // إزالة العنصر من الصفحة مباشرة لتجربة مستخدم أفضل
+                                    this.closest('.testimonial-card').remove();
+                                    alert('تم الحذف بنجاح!');
+                                } else {
+                                    // عرض رسالة الخطأ من السيرفر
+                                    return response.text().then(text => { throw new Error(text) });
+                                }
+                            })
+                            .catch(error => {
+                                console.error('خطأ في الحذف:', error);
+                                alert(`فشل الحذف: ${error.message}`);
+                            });
+                        }
+                    });
+                });
+            }
         });
     </script>
 
