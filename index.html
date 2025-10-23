@@ -1205,7 +1205,12 @@
             <div class="contact-card">
                 <h3>لنبدأ مشروعك القادم!</h3>
                 <p>هل لديك فكرة رائعة؟ نحن هنا لتحويلها إلى حقيقة. املأ النموذج وسنتواصل معك في أقرب وقت ممكن لمناقشة التفاصيل.</p>
-                <form class="contact-form" action="contact-success.html">
+                <form 
+                    name="contact" 
+                    class="contact-form" 
+                    method="POST" 
+                    data-netlify="true" 
+                    action="/contact-success.html">
                     <div class="form-group">
                         <label for="name">الاسم</label>
                         <input type="text" id="name" name="name" class="form-control" required>
