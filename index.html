@@ -1029,10 +1029,35 @@
         }
 
         .footer-bottom {
-            text-align: center;
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #9CA3AF;
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row; /* Side-by-side on larger screens */
+            }
+        }
+
+        .footer-social-icons {
+            display: flex;
+        }
+
+        .footer-social-icons a {
+            color: var(--primary-color); /* اللون الأزرق */
+            font-size: 1.8em; /* حجم أكبر */
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-social-icons a:hover {
+            color: #2563EB; /* أزرق أفتح عند التمرير */
+            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -1259,10 +1284,7 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; 2025 باسل ومازن. جميع الحقوق محفوظة.</p>
-            <div class="footer-social-icons">
-                <!-- استبدل # بروابط صفحاتكم الفعلية -->
-                <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            </div>
+            <div class="footer-social-icons"><a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></div>
         </div>
     </footer>
 
