@@ -74,13 +74,14 @@ app.delete('/api/testimonials/:id', (req, res) => {
     //      !!! مهم جداً: ضع عنوان الـ IP الخاص بك هنا !!!
     //  يمكنك معرفة الـ IP الخاص بك بالبحث في جوجل عن "what is my IP"
     // =================================================================
-    const allowedIp = '37.107.184.170'; // <--- تم وضع الـ IP الخاص بك هنا
+    // يمكن إضافة أكثر من IP في هذه القائمة
+    const allowedIps = ['37.107.184.170']; // <--- قائمة بـ IPs المسموح لها
 
     const requestIp = req.ip;
 
     console.log(`محاولة حذف من الـ IP: ${requestIp}`); // لغرض التجربة
 
-    if (requestIp !== allowedIp) {
+    if (!allowedIps.includes(requestIp)) {
         console.log('رفض الطلب: الـ IP غير مسموح له بالحذف.');
         return res.status(403).send('غير مصرح لك بالقيام بهذه العملية.');
     }
