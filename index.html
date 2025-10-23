@@ -612,6 +612,17 @@
             line-height: 1.7;
         }
 
+        .about-avatar {
+            font-size: 4.5em;
+            color: rgba(255, 255, 255, 0.25);
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        .about-card:hover .about-avatar {
+            color: var(--primary-color);
+        }
+
         /* -------------------------------------------------------------------------- */
         /*                        قسم معرض الأعمال (Portfolio Section)                        */
         /* -------------------------------------------------------------------------- */
@@ -1191,12 +1202,14 @@
             <div class="about-grid">
                 <!-- بطاقة باسل -->
                 <div class="about-card">
+                    <div class="about-avatar"><i class="fas fa-user-circle"></i></div>
                     <h3>باسل</h3>
                     <h4>مطور واجهات أمامية</h4>
                     <p>شغوف بتحويل التصاميم الإبداعية إلى واجهات تفاعلية وسريعة الاستجابة، مع التركيز على كتابة كود نظيف وفعال.</p>
                 </div>
                 <!-- بطاقة مازن -->
                 <div class="about-card">
+                    <div class="about-avatar"><i class="fas fa-user-circle"></i></div>
                     <h3>مازن</h3>
                     <h4>مصمم واجهات وتجربة مستخدم</h4>
                     <p>أهتم بأدق التفاصيل لإنشاء تجارب مستخدم سهلة وممتعة، مع التركيز على تحقيق أهداف العمل من خلال تصميم جذاب ومدروس.</p>
