@@ -1071,7 +1071,7 @@
             <div class="add-testimonial-card fade-in-section">
                 <h4>أضف رأيك</h4>
                 <p>شاركنا تجربتك معنا، رأيك يهمنا ويساعد الآخرين.</p>
-                <form class="contact-form" action="https://creative-coders-api.onrender.com/api/testimonials" method="POST">
+                <form class="contact-form" action="https://program-f2dx.onrender.com/api/testimonials" method="POST">
                     <div class="form-group">
                         <label for="testimonial-name">الاسم</label>
                         <input type="text" id="testimonial-name" name="name" class="form-control" required>
@@ -1220,7 +1220,7 @@
             // --- جلب وعرض آراء العملاء ---
             const testimonialsGrid = document.getElementById('testimonialsGrid');
             
-            fetch('https://creative-coders-api.onrender.com/api/testimonials')
+            fetch('https://program-f2dx.onrender.com/api/testimonials')
                 .then(response => response.json())
                 .then(data => {
                     // لعرض أحدث الآراء أولاً
