@@ -229,42 +229,6 @@
             }
         }
 
-        /* --- قسم الشهادات (الجديد بالصور) --- */
-        .certificates-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        @media (min-width: 768px) {
-            .certificates-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        .certificate-item {
-            display: block;
-            border-radius: 10px;
-            overflow: hidden; /* لإخفاء أي أجزاء من الصورة تخرج عن الإطار */
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .certificate-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-        }
-        
-        .certificate-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        /* -------------------- */
-
     </style>
 </head>
 <body>
@@ -335,20 +299,6 @@
                         <div class="progress-bar" style="width: 85%;"></div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="cv-section">
-            <h3>الشهادات</h3>
-            <div class="certificates-grid">
-                <!-- !!! مهم: ضع صور شهاداتك هنا !!! -->
-                <!-- أنشئ مجلد assets/certificates وضع الصور فيه -->
-                <a href="assets/certificates/basel-cert-1.jpg" target="_blank" class="certificate-item">
-                    <img src="assets/certificates/basel-cert-1.jpg" alt="شهادة مطور واجهات أمامية">
-                </a>
-                <a href="assets/certificates/basel-cert-2.jpg" target="_blank" class="certificate-item">
-                    <img src="assets/certificates/basel-cert-2.jpg" alt="شهادة تطوير الويب">
-                </a>
             </div>
         </div>
 
