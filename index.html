@@ -1210,7 +1210,9 @@
                     class="contact-form" 
                     method="POST" 
                     data-netlify="true" 
-                    action="/contact-success.html">
+                    >
+                    <input type="hidden" name="form-name" value="contact" />
+                    <input type="hidden" name="_redirect" value="/contact-success.html" />
                     <div class="form-group">
                         <label for="name">الاسم</label>
                         <input type="text" id="name" name="name" class="form-control" required>
