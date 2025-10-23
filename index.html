@@ -612,17 +612,6 @@
             line-height: 1.7;
         }
 
-        .about-avatar {
-            font-size: 4.5em;
-            color: rgba(255, 255, 255, 0.25);
-            margin-bottom: 15px;
-            transition: color 0.3s ease;
-        }
-
-        .about-card:hover .about-avatar {
-            color: var(--primary-color);
-        }
-
         /* -------------------------------------------------------------------------- */
         /*                        قسم معرض الأعمال (Portfolio Section)                        */
         /* -------------------------------------------------------------------------- */
@@ -1023,36 +1012,10 @@
         }
 
         .footer-bottom {
-            display: flex;
-            flex-direction: column; /* Stack on mobile */
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
+            text-align: center;
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #9CA3AF;
-        }
-
-        @media (min-width: 768px) {
-            .footer-bottom {
-                flex-direction: row; /* Side-by-side on larger screens */
-            }
-        }
-
-        .footer-social-icons {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-social-icons a {
-            color: #9CA3AF;
-            font-size: 1.4em;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .footer-social-icons a:hover {
-            color: white;
-            transform: translateY(-3px);
         }
     </style>
 </head>
@@ -1186,14 +1149,12 @@
             <div class="about-grid">
                 <!-- بطاقة باسل -->
                 <div class="about-card">
-                    <div class="about-avatar"><i class="fas fa-user-circle"></i></div>
                     <h3>باسل</h3>
                     <h4>مطور واجهات أمامية</h4>
                     <p>شغوف بتحويل التصاميم الإبداعية إلى واجهات تفاعلية وسريعة الاستجابة، مع التركيز على كتابة كود نظيف وفعال.</p>
                 </div>
                 <!-- بطاقة مازن -->
                 <div class="about-card">
-                    <div class="about-avatar"><i class="fas fa-user-circle"></i></div>
                     <h3>مازن</h3>
                     <h4>مصمم واجهات وتجربة مستخدم</h4>
                     <p>أهتم بأدق التفاصيل لإنشاء تجارب مستخدم سهلة وممتعة، مع التركيز على تحقيق أهداف العمل من خلال تصميم جذاب ومدروس.</p>
@@ -1278,15 +1239,18 @@
                     <li><a href="#contact">تواصل معنا</a></li>
                 </ul>
             </div>
+            <div class="footer-social">
+                <h4>تواصل اجتماعي</h4>
+                <div class="social-icons">
+                    <!-- استبدل # بروابط صفحاتكم الفعلية -->
+                    <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" target="_blank" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                </div>
+            </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2024 باسل ومازن. جميع الحقوق محفوظة.</p>
-            <div class="footer-social-icons">
-                <!-- استبدل # بروابط صفحاتكم الفعلية -->
-                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="#" target="_blank" aria-label="Behance"><i class="fab fa-behance"></i></a>
-            </div>
         </div>
     </footer>
 
