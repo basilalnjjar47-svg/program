@@ -1209,8 +1209,7 @@
                     name="contact" 
                     class="contact-form" 
                     method="POST" 
-                    data-netlify="true"
-                    action="/contact-success.html">
+                    data-netlify="true">
                     <input type="hidden" name="form-name" value="contact" />
                     <div class="form-group">
                         <label for="name">الاسم</label>
@@ -1379,6 +1378,40 @@
                 });
             });
 
+            // --- التعامل مع نموذج التواصل (Contact Form) ---
+            const contactForm = document.querySelector('form[name="contact"]');
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // منع الإرسال التقليدي
+
+                const formData = new FormData(contactForm);
+                const submitButton = this.querySelector('button[type="submit"]');
+
+                submitButton.disabled = true;
+                submitButton.innerHTML = 'جارٍ الإرسال...';
+
+                fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(formData).toString()
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // في حالة النجاح، يتم التوجيه إلى صفحة الشكر
+                        window.location.href = '/contact-success.html';
+                    } else {
+                        // في حالة الخطأ، يتم طباعته في الكونسول
+                        response.text().then(text => {
+                            throw new Error(`فشل إرسال النموذج: ${response.status} ${response.statusText} - ${text}`);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('!!! خطأ في إرسال نموذج التواصل !!!', error);
+                    showNotification('حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.', 'error');
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'إرسال الرسالة <i class="fas fa-paper-plane"></i>';
+                });
+            });
             // --- وظيفة إظهار الإشعارات ---
             function showNotification(message, type = 'success') {
                 const notification = document.getElementById('notification');
