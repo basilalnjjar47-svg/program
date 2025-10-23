@@ -242,19 +242,21 @@
             position: relative;
         }
 
-        .hero-title {
-            font-size: 2.5em; /* حجم الخط للهواتف */
-            font-weight: 700; /* عريض */
+        .hero-logo-container {
             margin-bottom: 15px;
-            letter-spacing: -0.025em; /* تقليل المسافة بين الحروف */
-            /* التأثير الأهم: نص متدرج ومتحرك */
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            /* دمج حركة الظهور مع حركة لمعان النص */
-            animation: fadeIn 1s ease-out forwards, textShine 5s ease-in-out infinite alternate;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .hero-logo {
+            max-width: 80%;
+            height: auto;
+            max-height: 120px; /* ارتفاع مبدئي للشعار على الهواتف */
+        }
+
+        @media (min-width: 768px) {
+            .hero-logo {
+                max-height: 180px; /* ارتفاع أكبر للشعار على الشاشات الكبيرة */
+            }
         }
 
         .hero-subtitle {
@@ -262,6 +264,8 @@
             color: #9CA3AF; /* لون أفتح */
             margin-bottom: 25px;
             font-weight: 400;
+            animation: fadeIn 1s ease-out 0.2s forwards;
+            opacity: 0;
         }
 
         .hero-description {
@@ -341,16 +345,6 @@
         /* للشاشات الكبيرة (Large screens - Large Desktops) */
         @media (min-width: 1024px) {
             .hero-title {
-                font-size: 5.5em;
-            }
-            .hero-subtitle {
-                font-size: 1.6em;
-            }
-        }
-
-        /* للشاشات الكبيرة (Large screens - Large Desktops) */
-        @media (min-width: 1024px) {
-            .hero-title {
                 font-size: 6em;
             }
             .hero-description {
@@ -361,9 +355,6 @@
         /* للشاشات المتوسطة (Medium screens - Desktops and up) */
         @media (min-width: 768px) {
             .hero-title {
-                font-size: 4.5em;
-            }
-            .hero-description {
                 font-size: 1.3em;
             }
         }
@@ -374,13 +365,6 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* حركة لمعان النص المتدرج */
-        @keyframes textShine {
-            to {
-                background-position: 200% center;
-            }
         }
 
         /* تطبيق حركة الظهور على العناصر الأخرى */
@@ -1063,8 +1047,10 @@
             <span></span>
         </div>
         <div class="hero-content">
-            <h1 class="hero-title">باسل<span class="ampersand">&</span>مازن</h1>
-            <h2 class="hero-subtitle">مصممو ومطورو واجهات أمامية</h2>
+            <div class="hero-logo-container">
+                <img src="assets/main-logo.png" alt="شعار الشركة" class="hero-logo">
+            </div>
+            <h2 class="hero-subtitle">نصمم ونطور تجارب رقمية فريدة</h2>
             <p class="hero-description">
                 نجمع بين الإبداع في التصميم والدقة في البرمجة
                 لتحويل أفكارك إلى تجارب رقمية فريدة.
