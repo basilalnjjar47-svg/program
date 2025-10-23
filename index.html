@@ -243,14 +243,14 @@
         }
 
         .hero-logo-container {
-            margin-bottom: 15px;
+            margin-bottom: 5px; /* تقليل المسافة السفلية */
             animation: fadeIn 1s ease-out forwards;
         }
 
         .hero-logo {
             max-width: 80%;
             height: auto;
-            max-height: 140px; /* زيادة ارتفاع الشعار على الهواتف */
+            max-height: 160px; /* تكبير الشعار على الهواتف */
             /* إضافة تأثير توهج متحرك باستخدام ألوان الموقع */
             animation: glow 5s ease-in-out infinite alternate;
             transition: transform 0.3s ease;
@@ -262,7 +262,7 @@
 
         @media (min-width: 768px) {
             .hero-logo {
-                max-height: 220px; /* زيادة ارتفاع الشعار على الشاشات الكبيرة */
+                max-height: 250px; /* تكبير الشعار على الشاشات الكبيرة */
             }
         }
 
