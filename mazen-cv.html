@@ -228,6 +228,46 @@
                 transform: scale(1);
             }
         }
+
+        /* --- قسم الشهادات --- */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .certificates-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .certificate-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .certificate-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .cert-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+        }
+
+        .cert-info h4 { margin: 0 0 5px 0; color: #FFFFFF; font-size: 1.1em; }
+        .cert-info p { margin: 0; color: #D1D5DB; font-size: 0.9em; line-height: 1.5; }
+        /* -------------------- */
+
     </style>
 </head>
 <body>
@@ -296,6 +336,26 @@
                     </div>
                     <div class="progress-bar-container">
                         <div class="progress-bar" style="width: 80%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cv-section">
+            <h3>الشهادات</h3>
+            <div class="certificates-grid">
+                <div class="certificate-card">
+                    <div class="cert-icon"><i class="fas fa-award"></i></div>
+                    <div class="cert-info">
+                        <h4>شهادة تصميم تجربة المستخدم المعتمدة (CXA)</h4>
+                        <p>من منظمة UXPA الدولية</p>
+                    </div>
+                </div>
+                <div class="certificate-card">
+                    <div class="cert-icon"><i class="fas fa-award"></i></div>
+                    <div class="cert-info">
+                        <h4>أخصائي تصميم الواجهات من جوجل</h4>
+                        <p>Coursera</p>
                     </div>
                 </div>
             </div>
