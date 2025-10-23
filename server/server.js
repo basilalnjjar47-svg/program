@@ -74,13 +74,13 @@ app.delete('/api/testimonials/:id', (req, res) => {
     //      !!! كلمة المرور السرية لحذف التعليقات !!!
     //      يمكنك تغييرها إلى أي كلمة مرور تريدها
     // =================================================================
-    const ADMIN_SECRET_KEY = 'admin123'; // <-- كلمة المرور هنا
+    const ADMIN_SECRET_KEYS = ['admin123', 'Marmazmoa120821%']; // <-- قائمة كلمات المرور هنا
 
     const providedSecret = req.headers['x-admin-secret'];
 
     console.log('محاولة حذف...');
 
-    if (providedSecret !== ADMIN_SECRET_KEY) {
+    if (!ADMIN_SECRET_KEYS.includes(providedSecret)) {
         console.log('رفض الطلب: كلمة المرور السرية غير صحيحة أو غير موجودة.');
         return res.status(403).send('غير مصرح لك بالقيام بهذه العملية.');
     }
