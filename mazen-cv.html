@@ -228,46 +228,6 @@
                 transform: scale(1);
             }
         }
-
-        /* --- قسم الشهادات --- */
-        .certificates-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .certificates-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .certificate-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .certificate-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .cert-icon {
-            font-size: 2.5em;
-            color: var(--primary-color);
-        }
-
-        .cert-info h4 { margin: 0 0 5px 0; color: #FFFFFF; font-size: 1.1em; }
-        .cert-info p { margin: 0; color: #D1D5DB; font-size: 0.9em; line-height: 1.5; }
-        /* -------------------- */
-
     </style>
 </head>
 <body>
@@ -284,25 +244,25 @@
 
         <div class="cv-section">
             <h3>ملخص</h3>
-            <p>مصمم UI/UX مبدع بخبرة Y سنوات في إنشاء تجارب مستخدم بديهية وجذابة. متخصص في البحث عن المستخدمين، تصميم الواجهات، واختبار قابلية الاستخدام لتقديم حلول تصميمية فعالة ومبتكرة.</p>
+            <p>مطور برمجيات يتمتع بخبرة في تصميم وتطوير تطبيقات الويب باستخدام أحدث التقنيات. شغوف بحل المشكلات التقنية وتطوير حلول مبتكرة تُحسِّن من كفاءة الأنظمة وتجربة المستخدم. أمتلك مهارات قوية في العمل الجماعي، وتحليل المتطلبات، وكتابة كود نظيف ومنظم، وأسعى دائمًا للتعلّم المستمر وتحسين الأداء.</p>
         </div>
 
         <div class="cv-section">
-            <h3>الخبرات</h3>
+            <h3>💼 الخبرات</h3>
             <ul>
                 <li>
-                    <strong>مصمم UI/UX | شركة ABC | 2021 - حتى الآن</strong>
+                    <strong> مطور واجهات أمامية | مستقل (Freelancer)2017 - حتى الآن</strong>
                     <ul>
-                        <li>تصميم واجهات مستخدم لتطبيقات الويب والجوال.</li>
-                        <li>إجراء أبحاث المستخدم واختبارات قابلية الاستخدام.</li>
-                        <li>إنشاء نماذج أولية وتدفقات المستخدم.</li>
+                        <li>تطوير مواقع ويب متكاملة باستخدام HTML, CSSو JavaScript .</li>
+                        <li>التعاون مع عملاء من مختلف المجالات لتحويل الأفكار إلى مشاريع واقعية.</li>
+                        <li>تحسين الكود وضمان توافق المواقع مع مختلف الأجهزة والمتصفحات.</li>
                     </ul>
                 </li>
                 <li>
-                    <strong>مصمم جرافيك | استوديو التصميم | 2019 - 2021</strong>
+                    <strong> مطور UI/UX | شركة XYZ2021 - 2023</strong>
                     <ul>
-                        <li>تصميم مواد تسويقية وهوية بصرية للعملاء.</li>
-                        <li>التعاون مع فرق التطوير لضمان تنفيذ التصميم.</li>
+                        <li>تصميم واجهات مستخدم احترافية لتطبيقات الويب والجوال.</li>
+                        <li>اختبار قابلية الاستخدام وتحليل سلوك المستخدم لتحسين تجربة العميل.</li>
                     </ul>
                 </li>
             </ul>
@@ -314,7 +274,7 @@
                 <div class="skill">
                     <div class="skill-info">
                         <span>HTML5</span>
-                        <span>90%</span>
+                        <span>100%</span>
                     </div>
                     <div class="progress-bar-container">
                         <div class="progress-bar" style="width: 90%;"></div>
@@ -323,7 +283,7 @@
                 <div class="skill">
                     <div class="skill-info">
                         <span>CSS3</span>
-                        <span>95%</span>
+                        <span>100%</span>
                     </div>
                     <div class="progress-bar-container">
                         <div class="progress-bar" style="width: 95%;"></div>
@@ -332,7 +292,7 @@
                 <div class="skill">
                     <div class="skill-info">
                         <span>JavaScript</span>
-                        <span>80%</span>
+                        <span>99%</span>
                     </div>
                     <div class="progress-bar-container">
                         <div class="progress-bar" style="width: 80%;"></div>
@@ -342,30 +302,10 @@
         </div>
 
         <div class="cv-section">
-            <h3>الشهادات</h3>
-            <div class="certificates-grid">
-                <div class="certificate-card">
-                    <div class="cert-icon"><i class="fas fa-award"></i></div>
-                    <div class="cert-info">
-                        <h4>شهادة تصميم تجربة المستخدم المعتمدة (CXA)</h4>
-                        <p>من منظمة UXPA الدولية</p>
-                    </div>
-                </div>
-                <div class="certificate-card">
-                    <div class="cert-icon"><i class="fas fa-award"></i></div>
-                    <div class="cert-info">
-                        <h4>أخصائي تصميم الواجهات من جوجل</h4>
-                        <p>Coursera</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="cv-section">
             <h3>اللغات</h3>
             <ul>
                 <li><strong>العربية:</strong> اللغة الأم</li>
-                <li><strong>الإنجليزية:</strong> إتقان مهني كامل</li>
+                <li><strong>الإنجليزية:</strong> إتقان مهني متقدّم في القراءة والكتابة والمحادثة</li>
             </ul>
         </div>
 
