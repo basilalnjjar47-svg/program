@@ -250,13 +250,26 @@
         .hero-logo {
             max-width: 80%;
             height: auto;
-            max-height: 120px; /* ارتفاع مبدئي للشعار على الهواتف */
+            max-height: 140px; /* زيادة ارتفاع الشعار على الهواتف */
+            /* إضافة تأثير توهج متحرك باستخدام ألوان الموقع */
+            animation: glow 5s ease-in-out infinite alternate;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.05); /* تكبير بسيط عند التمرير */
         }
 
         @media (min-width: 768px) {
             .hero-logo {
-                max-height: 180px; /* ارتفاع أكبر للشعار على الشاشات الكبيرة */
+                max-height: 220px; /* زيادة ارتفاع الشعار على الشاشات الكبيرة */
             }
+        }
+
+        /* حركة التوهج المتدرج للشعار */
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 15px var(--primary-color)); }
+            to { filter: drop-shadow(0 0 25px var(--secondary-color)); }
         }
 
         .hero-subtitle {
