@@ -1304,25 +1304,33 @@
                 deleteButtons.forEach(button => {
                     button.addEventListener('click', function() {
                         const testimonialId = this.getAttribute('data-id');
-                        
-                        if (confirm('هل أنت متأكد من أنك تريد حذف هذا الرأي؟')) {
-                            fetch(`https://program-f2dx.onrender.com/api/testimonials/${testimonialId}`, {
-                                method: 'DELETE',
-                            })
-                            .then(response => {
-                                if (response.ok) {
-                                    // إزالة العنصر من الصفحة مباشرة لتجربة مستخدم أفضل
-                                    this.closest('.testimonial-card').remove();
-                                    alert('تم الحذف بنجاح!');
-                                } else {
-                                    // عرض رسالة الخطأ من السيرفر
-                                    return response.text().then(text => { throw new Error(text) });
-                                }
-                            })
-                            .catch(error => {
-                                console.error('خطأ في الحذف:', error);
-                                alert(`فشل الحذف: ${error.message}`);
-                            });
+
+                        // طلب كلمة المرور من المستخدم
+                        const secret = prompt('للحذف، يرجى إدخال كلمة المرور:');
+
+                        // إذا أدخل المستخدم كلمة مرور (ولم يضغط إلغاء)
+                        if (secret) {
+                            if (confirm('هل أنت متأكد من أنك تريد حذف هذا الرأي؟')) {
+                                fetch(`https://program-f2dx.onrender.com/api/testimonials/${testimonialId}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        // إرسال كلمة المرور في الـ Headers
+                                        'X-Admin-Secret': secret
+                                    }
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        this.closest('.testimonial-card').remove();
+                                        alert('تم الحذف بنجاح!');
+                                    } else {
+                                        return response.text().then(text => { throw new Error(text) });
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('خطأ في الحذف:', error);
+                                    alert(`فشل الحذف: ${error.message}`);
+                                });
+                            }
                         }
                     });
                 });

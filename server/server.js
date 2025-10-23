@@ -71,18 +71,17 @@ app.post('/api/testimonials', (req, res) => {
 // 3. نقطة النهاية (API) لحذف رأي عميل (محمية بـ IP)
 app.delete('/api/testimonials/:id', (req, res) => {
     // =================================================================
-    //      !!! مهم جداً: ضع عنوان الـ IP الخاص بك هنا !!!
-    //  يمكنك معرفة الـ IP الخاص بك بالبحث في جوجل عن "what is my IP"
+    //      !!! كلمة المرور السرية لحذف التعليقات !!!
+    //      يمكنك تغييرها إلى أي كلمة مرور تريدها
     // =================================================================
-    // يمكن إضافة أكثر من IP في هذه القائمة
-    const allowedIps = ['37.107.184.170']; // <--- قائمة بـ IPs المسموح لها
+    const ADMIN_SECRET_KEY = 'admin123'; // <-- كلمة المرور هنا
 
-    const requestIp = req.ip;
+    const providedSecret = req.headers['x-admin-secret'];
 
-    console.log(`محاولة حذف من الـ IP: ${requestIp}`); // لغرض التجربة
+    console.log('محاولة حذف...');
 
-    if (!allowedIps.includes(requestIp)) {
-        console.log('رفض الطلب: الـ IP غير مسموح له بالحذف.');
+    if (providedSecret !== ADMIN_SECRET_KEY) {
+        console.log('رفض الطلب: كلمة المرور السرية غير صحيحة أو غير موجودة.');
         return res.status(403).send('غير مصرح لك بالقيام بهذه العملية.');
     }
 
