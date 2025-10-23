@@ -1079,7 +1079,8 @@
             <div class="add-testimonial-card fade-in-section">
                 <h4>أضف رأيك</h4>
                 <p>شاركنا تجربتك معنا، رأيك يهمنا ويساعد الآخرين.</p>
-                <form class="contact-form" action="https://program-f2dx.onrender.com/api/testimonials" method="POST">
+                <!-- أزلنا action و method وسنعتمد على id -->
+                <form id="addTestimonialForm" class="contact-form">
                     <div class="form-group">
                         <label for="testimonial-name">الاسم</label>
                         <input type="text" id="testimonial-name" name="name" class="form-control" required>
@@ -1226,6 +1227,21 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // --- جلب وعرض آراء العملاء ---
+            function fetchAndDisplayTestimonials() {
+                fetch('https://program-f2dx.onrender.com/api/testimonials')
+                    .then(response => response.json())
+                    .then(data => {
+                        // لعرض أحدث الآراء أولاً
+                        const testimonials = data.reverse();
+                        // إفراغ المحتوى القديم
+                        testimonialsGrid.innerHTML = ''; 
+                        testimonials.forEach(testimonial => {
+                            addTestimonialToDOM(testimonial);
+                        });
+                        addDeleteFunctionality();
+                    })
+                    .catch(error => console.error('خطأ في جلب آراء العملاء:', error));
+            }
             const testimonialsGrid = document.getElementById('testimonialsGrid');
             
             fetch('https://program-f2dx.onrender.com/api/testimonials')
@@ -1236,26 +1252,55 @@
                     // إفراغ المحتوى القديم
                     testimonialsGrid.innerHTML = ''; 
                     testimonials.forEach(testimonial => {
-                        const card = `
-                            <div class="testimonial-card">
-                                <button class="delete-btn" data-id="${testimonial.id}" title="حذف الرأي">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                                <p class="testimonial-quote">${testimonial.message}</p>
-                                <div class="testimonial-author">
-                                    <div class="testimonial-author-info">
-                                        <h5>${testimonial.name}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        testimonialsGrid.innerHTML += card;
+                        addTestimonialToDOM(testimonial);
                     });
 
                     // بعد إضافة الأزرار، قم بتفعيلها
                     addDeleteFunctionality();
                 })
                 .catch(error => console.error('خطأ في جلب آراء العملاء:', error));
+
+            // --- التعامل مع نموذج إضافة رأي جديد ---
+            const addForm = document.getElementById('addTestimonialForm');
+            addForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // منع الإرسال التقليدي للنموذج
+
+                const name = document.getElementById('testimonial-name').value;
+                const message = document.getElementById('testimonial-message').value;
+                const submitButton = this.querySelector('button[type="submit"]');
+
+                // تعطيل الزر مؤقتاً
+                submitButton.disabled = true;
+                submitButton.innerHTML = 'جارٍ الإرسال...';
+
+                fetch('https://program-f2dx.onrender.com/api/testimonials', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name: name, message: message }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('حدث خطأ أثناء إرسال الرأي.');
+                    }
+                    return response.json();
+                })
+                .then(newTestimonial => {
+                    alert('تم ارسال التعليق بنجاح. شكراً لك!');
+                    addTestimonialToDOM(newTestimonial, true); // إضافة التعليق الجديد في بداية القائمة
+                    addForm.reset(); // إفراغ حقول النموذج
+                })
+                .catch(error => {
+                    console.error('خطأ في إضافة الرأي:', error);
+                    alert('فشل إرسال الرأي. يرجى المحاولة مرة أخرى.');
+                })
+                .finally(() => {
+                    // إعادة تفعيل الزر
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'إضافة الرأي <i class="fas fa-plus"></i>';
+                });
+            });
 
 
             // JavaScript لحركة ظهور الأقسام عند التمرير
@@ -1298,6 +1343,27 @@
                 });
             });
 
+            // --- وظيفة لإضافة بطاقة رأي إلى الصفحة ---
+            function addTestimonialToDOM(testimonial, prepend = false) {
+                const card = document.createElement('div');
+                card.className = 'testimonial-card';
+                card.innerHTML = `
+                    <button class="delete-btn" data-id="${testimonial.id}" title="حذف الرأي">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <p class="testimonial-quote">${testimonial.message}</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-info">
+                            <h5>${testimonial.name}</h5>
+                        </div>
+                    </div>
+                `;
+                if (prepend) {
+                    testimonialsGrid.prepend(card); // إضافة العنصر في البداية
+                } else {
+                    testimonialsGrid.appendChild(card); // إضافة العنصر في النهاية
+                }
+            }
             // --- وظيفة الحذف ---
             function addDeleteFunctionality() {
                 const deleteButtons = document.querySelectorAll('.delete-btn');

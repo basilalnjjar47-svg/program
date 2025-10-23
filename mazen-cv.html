@@ -21,7 +21,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            text-align: right; /* Changed to right for RTL CV content */
+            text-align: right;
             padding: 20px;
             overflow-x: hidden;
             position: relative;
@@ -56,13 +56,13 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             padding: 40px;
             border-radius: 15px;
-            max-width: 800px; /* Wider for CV content */
+            max-width: 800px;
             width: 100%;
             opacity: 0;
             transform: scale(0.95);
             animation: fadeInZoom 0.5s 0.2s ease-out forwards;
-            margin: 20px auto; /* Center and add vertical margin */
-            text-align: right; /* Ensure text aligns right within container */
+            margin: 20px auto;
+            text-align: right;
         }
 
         @media (min-width: 768px) {
@@ -132,7 +132,7 @@
         }
 
         .cv-section ul li::before {
-            content: '\f00c'; /* Font Awesome check icon */
+            content: '\f00c';
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
             color: var(--primary-color);
@@ -144,7 +144,7 @@
         .contact-info {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* Center contact items */
+            justify-content: center;
             gap: 20px;
             margin-top: 20px;
             margin-bottom: 30px;
